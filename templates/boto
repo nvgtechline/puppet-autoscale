@@ -1,0 +1,3 @@
+[Boto]
+autoscale_endpoint = autoscaling.__AWS_REGION__.amazonaws.com
+autoscale_region_name = __AWS_REGION__

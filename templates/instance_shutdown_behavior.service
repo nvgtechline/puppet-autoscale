@@ -1,0 +1,13 @@
+[Unit]
+Description=Set shutdown behavior of autoscale instance to terminate.
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=True
+ExecStart=/etc/systemd/system/instance_shutdown_behavior.d/set_terminate.sh
+User=ops
+Group=ops
+
+[Install]
+WantedBy=multi-user.target

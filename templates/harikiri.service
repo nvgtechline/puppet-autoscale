@@ -1,0 +1,12 @@
+[Unit]
+Description=HySDS service for worker instance seppuku
+After=network.target
+
+[Service]
+ExecStart=<%= @verdi_dir %>/bin/python /etc/systemd/system/harikiri.d/harikiri.py <%= @work_dir %>
+Restart=on-failure
+User=ops
+Group=ops
+
+[Install]
+WantedBy=multi-user.target

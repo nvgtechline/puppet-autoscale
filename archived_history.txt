@@ -1,0 +1,191 @@
+commit d1f0cce2756db9869b5665bf9c32fe2094ed8ef7
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Mar 24 17:38:28 2017 +0000
+
+    sync harikiri
+
+commit 3a875deef423910d6229b23bd6a308cd00c9b632
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Mar 23 18:24:30 2017 +0000
+
+    update harikiri with improved logging
+
+commit 09bbaa0824211f6ab81aef1bfcb75bc8e699c1b6
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Mar 14 16:39:43 2017 +0000
+
+    ensure dm-event service is running
+
+commit df27204c76a8366fe53ced3e4d2507495f281d42
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Mar 9 20:10:33 2017 +0000
+
+    add docker-ephemeral-lvm service
+
+commit b95ba01688020a6c0933d6376c77c8566aef8b8e
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Mar 9 20:02:30 2017 +0000
+
+    update to handle multiple profiles in AWS creds
+
+commit ebc0c8d6309dda1e24e9c3bfd027410716f9a4e0
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Nov 8 19:26:56 2016 +0000
+
+    sync harikiri
+
+commit 13acf9ef3914e15784d07107294c99c1b1e4f890
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Mon Nov 7 23:52:00 2016 +0000
+
+    sync harikiri
+
+commit 2e7061bc7453f4002cbdaae1494ec8134fb938b7
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Mon Nov 7 21:05:49 2016 +0000
+
+    sync harikiri
+
+commit 64b86349a6e638f3e78803c8ea4d4075712c93b5
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Nov 2 20:35:42 2016 +0000
+
+    sync harikiri
+
+commit d7fa35e057233410b267816c51a3fe24c3a60f0c
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Oct 28 07:05:10 2016 +0000
+
+    sync harikiri
+
+commit 9df16d6dcd0693fe4c7f425f6dd50406d738afd6
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Oct 28 06:36:52 2016 +0000
+
+    sync harikiri.py from hysds
+
+commit 92141d0c9db69a6ca7f4c0f9037c3a7d299611b9
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Oct 25 18:19:27 2016 +0000
+
+    harikiri improvements
+    
+    Shut down supervisord gracefully using systemctl.
+    Call terminate_instance() instead of detach_instances() to do the
+    termination/decrement for us instead of calling shutdown ourselves.
+
+commit 833dd02b072b1c8c25ec82e109421b80e456beb1
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Sun May 1 06:33:50 2016 +0000
+
+    update regex to match updated work dir pattern
+
+commit a3c0b671ca54425996022346e5712abfc2663889
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Mar 25 02:10:23 2016 +0000
+
+    use awscli to download tarball; resolve aws path via env
+
+commit 06708bd6de156687474a163afef66de230446d99
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Nov 10 02:25:14 2015 +0000
+
+    updated for ease of replacement via sed
+
+commit 3433fa0bc5d691a260b1e73377d781c7e3c41610
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Oct 8 19:40:21 2015 +0000
+
+    use augeas to turn off requiretty
+
+commit cfea1e3c585395d041f27d34cb744af9ae58851d
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Oct 8 19:29:37 2015 +0000
+
+    disable requiretty which prevents harikiri from working from systemd
+
+commit bc29d697eef6b59f7b3747582dd9b1df3c562ae0
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Oct 8 18:57:49 2015 +0000
+
+    add boto and s3cfg configs
+
+commit 2622137891dfb9728e04899e381e3800d61bc6c6
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 23:58:55 2015 +0000
+
+    don't start up during provisioning
+
+commit c96920d9b1721779e08c2942ce5b9ef809828100
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 21:58:51 2015 +0000
+
+    set user/group to ops
+
+commit a618f71ea069f4eec631ec2af151de585e5649c7
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 21:43:22 2015 +0000
+
+    set PATH env so that we don't have to hard-code them in scripts
+    
+    Point to harikiri.py in systemd directory.
+
+commit 1103c9ad7918d2a8d4d06e7c4c7f97ff79d823be
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 21:19:21 2015 +0000
+
+    added harikiri.py; use absolute paths
+
+commit e52b4c2f653eb4bcc4d604a28aaec0cd11f0dc70
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 21:03:48 2015 +0000
+
+    added provision-verdi service
+
+commit cd42e52736699acec2a3c69a20f299f700dd8ae6
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 19:54:33 2015 +0000
+
+    add supervisord service
+
+commit 4e9557274260de05f64717d415a3814cb31214a6
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 19:17:39 2015 +0000
+
+    show instance_shutdown_behavior.service as active
+
+commit 5a3025351309e4305318cf2c60ff17214b127691
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 19:11:04 2015 +0000
+
+    add setting of instance shutdown behavior to 'terminate'
+
+commit 916bc486878a28ee9b206662b113fccf56853e75
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 18:22:12 2015 +0000
+
+    install gof3r config file
+
+commit 83981307c0e82a0aac1d6ffbce3a17e13e536233
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 18:02:28 2015 +0000
+
+    remove list
+
+commit 710dcb856752744d092fc803ea3c83f57bd3e1a2
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 18:01:45 2015 +0000
+
+    add configuration instructions
+
+commit bdce0bf6ddf391b49de159ec2f2b3081bb8da21b
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 17:26:01 2015 +0000
+
+    setup AWS config/credentials file; subclass verdi puppet class since scripts are specific to this hysds component
+
+commit 1f3807175eccb6a2ab193cbb86b154709cd67f0b
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 7 15:35:41 2015 +0000
+
+    initial import

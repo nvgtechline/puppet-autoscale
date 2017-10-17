@@ -1,0 +1,22 @@
+[Unit]
+Description=Supervisor process control system for UNIX - HySDS services
+After=provision-verdi.service
+Requires=provision-verdi.service
+
+[Service]
+Environment=LD_LIBRARY_PATH=/usr/lib:/usr/lib64:/usr/local/lib:$LD_LIBRARY_PATH
+Environment=GIT_SSL_NO_VERIFY=true
+Environment=VERDI_DIR=<%= @verdi_dir %>
+Environment=HOME=/home/<%= @user %>
+Environment=PATH=<%= @verdi_dir %>/bin:/bin:/usr/bin:/usr/local/bin:$PATH
+Environment=PYTHON_HOME=<%= @verdi_dir %>
+ExecStart=<%= @verdi_dir %>/bin/supervisord -n -c <%= @verdi_dir %>/etc/supervisord.conf
+ExecStop=<%= @verdi_dir %>/bin/supervisorctl shutdown
+ExecReload=<%= @verdi_dir %>/bin/supervisorctl reload
+KillMode=process
+Restart=on-failure
+RestartSec=30s
+User=ops
+
+[Install]
+WantedBy=multi-user.target
