@@ -1,0 +1,12 @@
+[Unit]
+Description=HySDS spot instance termination detector
+After=network.target
+
+[Service]
+ExecStart=<%= @verdi_dir %>/bin/python /etc/systemd/system/spot_termination_detector.d/spot_termination_detector.py -c 60 $(grep ^MOZART_REST_URL <%= @verdi_dir %>/ops/hysds/celeryconfig.py | awk 'BEGIN{FS="\""}{print $2}') <%= @work_dir %>
+Restart=on-failure
+User=ops
+Group=ops
+
+[Install]
+WantedBy=multi-user.target

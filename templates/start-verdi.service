@@ -1,0 +1,20 @@
+[Unit]
+Description=Start up Verdi
+After=provision-verdi.target
+Requires=provision-verdi.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=True
+Environment=LD_LIBRARY_PATH=/usr/lib:/usr/lib64:/usr/local/lib:$LD_LIBRARY_PATH
+Environment=GIT_SSL_NO_VERIFY=true
+Environment=VERDI_DIR=<%= @verdi_dir %>
+Environment=HOME=/home/<%= @user %>
+Environment=PATH=<%= @verdi_dir %>/bin:/bin:/usr/bin:/usr/local/bin:$PATH
+Environment=PYTHON_HOME=<%= @verdi_dir %>
+ExecStart=/etc/systemd/system/start-verdi.d/start-verdi.sh
+User=ops
+Group=ops
+
+[Install]
+WantedBy=multi-user.target

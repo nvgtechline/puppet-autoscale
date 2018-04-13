@@ -119,6 +119,45 @@ class autoscale inherits verdi {
 
 
   #####################################################
+  # spot_termination_detector service
+  #####################################################
+
+  file { '/etc/systemd/system/spot_termination_detector.d':
+    ensure  => directory,
+    mode    => 0755,
+  }
+
+
+  file { '/etc/systemd/system/spot_termination_detector.d/spot_termination_detector.py':
+    ensure  => present,
+    mode    => 0755,
+    content => template('autoscale/spot_termination_detector.py'),
+    require => File['/etc/systemd/system/spot_termination_detector.d'],
+  }
+
+
+  file { '/etc/systemd/system/spot_termination_detector.service':
+    ensure  => present,
+    mode    => 0644,
+    content => template('autoscale/spot_termination_detector.service'),
+    require => File['/etc/systemd/system/spot_termination_detector.d/spot_termination_detector.py'],
+    notify  => Exec['daemon-reload'],
+  }
+
+
+  service { 'spot_termination_detector':
+    ensure  => stopped,
+    enable  => true,
+    require => [
+                File['/etc/systemd/system/spot_termination_detector.service'],
+                File["/home/$user/.aws/credentials"],
+                File["/home/$user/.aws/config"],
+                Exec['daemon-reload'],
+               ],
+  }
+
+
+  #####################################################
   # set instance shutdown behavior to terminate
   #####################################################
 
@@ -198,6 +237,46 @@ class autoscale inherits verdi {
 
 
   #####################################################
+  # start-verdi service
+  #####################################################
+
+  file { '/etc/systemd/system/start-verdi.d':
+    ensure  => directory,
+    mode    => 0755,
+  }
+
+
+  file { '/etc/systemd/system/start-verdi.d/start-verdi.sh':
+    ensure  => present,
+    mode    => 0755,
+    content => template('autoscale/start-verdi.sh'),
+    require => File['/etc/systemd/system/start-verdi.d'],
+  }
+
+
+  file { '/etc/systemd/system/start-verdi.service':
+    ensure  => present,
+    mode    => 0644,
+    content => template('autoscale/start-verdi.service'),
+    require => File['/etc/systemd/system/start-verdi.d/start-verdi.sh'],
+    notify  => Exec['daemon-reload'],
+  }
+
+
+  service { 'start-verdi':
+    ensure  => stopped,
+    enable  => true,
+    require => [
+                File['/etc/systemd/system/start-verdi.service'],
+                File["/home/$user/.aws/credentials"],
+                File["/home/$user/.aws/config"],
+                File["/home/$user/.gof3r.ini"],
+                Exec['daemon-reload'],
+               ],
+  }
+
+
+  #####################################################
   # docker-ephemeral-lvm service
   #####################################################
 
@@ -248,26 +327,26 @@ class autoscale inherits verdi {
   # supervisord service
   #####################################################
 
-  file { '/etc/systemd/system/supervisord.service':
-    ensure  => present,
-    mode    => 0644,
-    content => template('autoscale/supervisord.service'),
-    notify  => Exec['daemon-reload'],
-  }
+  #file { '/etc/systemd/system/supervisord.service':
+  #  ensure  => present,
+  #  mode    => 0644,
+  #  content => template('autoscale/supervisord.service'),
+  #  notify  => Exec['daemon-reload'],
+  #}
 
 
-  service { 'supervisord':
-    ensure  => stopped,
-    enable  => true,
-    require => [
-                File['/etc/systemd/system/supervisord.service'],
-                File["/home/$user/.aws/credentials"],
-                File["/home/$user/.aws/config"],
-                Service['docker-ephemeral-lvm'],
-                Service['provision-verdi'],
-                Exec['daemon-reload'],
-               ],
-  }
+  #service { 'supervisord':
+  #  ensure  => stopped,
+  #  enable  => true,
+  #  require => [
+  #              File['/etc/systemd/system/supervisord.service'],
+  #              File["/home/$user/.aws/credentials"],
+  #              File["/home/$user/.aws/config"],
+  #              Service['docker-ephemeral-lvm'],
+  #              Service['provision-verdi'],
+  #              Exec['daemon-reload'],
+  #             ],
+  #}
 
 
 }
