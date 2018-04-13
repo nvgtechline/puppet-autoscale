@@ -71,6 +71,26 @@ class autoscale inherits verdi {
 
 
   #####################################################
+  # install docker-compose
+  #####################################################
+
+  file { '/usr/local/bin':
+    ensure  => directory,
+    mode    => 0755,
+  }
+
+
+  file { "/usr/local/bin/docker-compose":
+    ensure  => file,
+    mode    => 0755,
+    source => 'puppet:///modules/autoscale/docker-compose',
+    require => [
+        File['/usr/local/bin'],
+    ],
+  }
+
+
+  #####################################################
   # harikiri service
   #####################################################
 

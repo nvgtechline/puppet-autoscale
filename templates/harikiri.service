@@ -1,6 +1,6 @@
 [Unit]
 Description=HySDS service for worker instance seppuku
-After=network.target
+After=start-verdi.target
 
 [Service]
 ExecStart=<%= @verdi_dir %>/bin/python /etc/systemd/system/harikiri.d/harikiri.py -l $(grep ^MOZART_REST_URL <%= @verdi_dir %>/ops/hysds/celeryconfig.py | awk 'BEGIN{FS="\""}{print $2}') <%= @work_dir %>
