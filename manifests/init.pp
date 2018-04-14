@@ -369,4 +369,19 @@ class autoscale inherits verdi {
   #}
 
 
+  #####################################################
+  # disable httpd
+  #####################################################
+
+  if defined(Service["httpd"]) {
+    service { 'httpd':
+      ensure     => stopped,
+      enable     => false,
+      hasrestart => true,
+      hasstatus  => true,
+                     Exec['daemon-reload'],
+                    ], 
+    }
+  }
+
 }
