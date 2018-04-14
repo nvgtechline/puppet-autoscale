@@ -1,7 +1,7 @@
 [Unit]
 Description=Start up Verdi
-After=provision-verdi.target
-Requires=provision-verdi.service
+After=provision-verdi.service
+Require=provision-verdi.service
 
 [Service]
 Environment=LD_LIBRARY_PATH=/usr/lib:/usr/lib64:/usr/local/lib:$LD_LIBRARY_PATH

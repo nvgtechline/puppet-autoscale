@@ -1,6 +1,6 @@
 [Unit]
 Description=On-the-fly Verdi Provisioning - Download, extraction and installation of code/data bundle
-After=docker-ephemeral-lvm.target
+After=docker-ephemeral-lvm.service
 Requires=docker-ephemeral-lvm.service
 
 [Service]
