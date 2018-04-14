@@ -379,8 +379,9 @@ class autoscale inherits verdi {
       enable     => false,
       hasrestart => true,
       hasstatus  => true,
-                     Exec['daemon-reload'],
-                    ], 
+      require => [
+                  Exec['daemon-reload'],
+                 ], 
     }
   }
 
