@@ -79,25 +79,32 @@ if [[ ! -e "$DEV1" && ! -e "$DEV2" ]]; then
         ROOT_NODE=$nvme_dev
       fi
     done
-    if [ -z ${ROOT_NODE+x} ]; then
-      echo "ROOT_NODE for ${ROOT_DEV} was not found."
-      exit 1
-    fi
-  
+
     # get other devices
-    NVME_EBS_BLK_DEVS=( `nvme list | grep -v ${ROOT_NODE} | grep '^/dev/' | awk '{print $1}' | sort` )
+    if [ -z ${ROOT_NODE+x} ]; then
+        NVME_EBS_BLK_DEVS=( `nvme list |  grep '^/dev/' | awk '{print $1}' | sort` )
+    else
+        NVME_EBS_BLK_DEVS=( `nvme list | grep -v ${ROOT_NODE} | grep '^/dev/' | awk '{print $1}' | sort` )
+    fi
     NVME_EBS_BLK_DEVS_CNT=${#NVME_EBS_BLK_DEVS[@]}
     echo "Number of NVMe EBS block devices: $NVME_EBS_BLK_DEVS_CNT"
   
     # assign devices
-    DEV1=${NVME_EBS_BLK_DEVS[0]}
-    DEV2=${NVME_EBS_BLK_DEVS[1]}
+    if [ "$NVME_EBS_BLK_DEVS_CNT" -ge 2 ]; then
+      DEV1=${NVME_EBS_BLK_DEVS[0]}
+      DEV2=${NVME_EBS_BLK_DEVS[1]}
+    elif [ "$NVME_EBS_BLK_DEVS_CNT" -eq 1 ]; then
+      DEV1=${NVME_EBS_BLK_DEVS[0]}
+      DEV2=/dev/xvdc
+    else
+      DEV1=/dev/xvdb
+      DEV2=/dev/xvdc
+    fi
   else
     DEV1=/dev/xvdb
     DEV2=/dev/xvdc
   fi
 fi
-
 # get sizes
 DEV1_SIZE=$(blockdev --getsize64 $DEV1)
 DEV2_SIZE=$(blockdev --getsize64 $DEV2)
